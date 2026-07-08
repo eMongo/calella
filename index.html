@@ -136,21 +136,6 @@
       background: radial-gradient(circle, rgba(255, 255, 255, 0.34), transparent 65%);
     }
 
-    .progress {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 38px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.22);
-      color: rgba(255, 255, 255, 0.96);
-      font-size: 0.88rem;
-      font-weight: 850;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-
     .challenge-content {
       display: grid;
       min-height: 220px;
@@ -175,7 +160,8 @@
       text-shadow: 0 10px 34px rgba(7, 59, 76, 0.25);
     }
 
-    .challenge-es {
+    .challenge-es,
+    .challenge-da {
       margin: 0;
       color: rgba(255, 255, 255, 0.86);
       font-size: clamp(1.12rem, 4.8vw, 1.75rem);
@@ -184,6 +170,11 @@
       line-height: 1.28;
       text-wrap: balance;
       text-shadow: 0 7px 22px rgba(7, 59, 76, 0.18);
+    }
+
+    .challenge-da {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: clamp(1rem, 4.2vw, 1.5rem);
     }
 
     .actions {
@@ -336,10 +327,10 @@
 
       <main>
         <section class="challenge-card" aria-live="polite">
-          <div class="progress" id="progress">Challenge 1 / 100</div>
           <div class="challenge-content" id="challengeContent">
             <p class="challenge-en" id="challengeEn"></p>
             <p class="challenge-es" id="challengeEs"></p>
+            <p class="challenge-da" id="challengeDa"></p>
           </div>
         </section>
 
@@ -457,11 +448,114 @@
       { en: "Take the happiest final challenge photo your holiday team can make.", es: "Tomen la foto final más feliz que pueda hacer su equipo de vacaciones." }
     ];
 
+    const danishTranslations = [
+      "Tag den sjoveste gruppe-selfie på stranden!",
+      "Poser som filmstjerner på promenaden i Calella.",
+      "Lav et menneskeligt palmetræ med armene som grene.",
+      "Fang alle, der hopper på samme tid tæt ved havet.",
+      "Byg et lille sandslot og kron det med solbriller.",
+      "Tag en selfie, hvor det ser ud som om nogen holder solen.",
+      "Lav en familiepyramide-pose uden at klatre på nogen.",
+      "Lad som om din is er en mikrofon, og syng lydløst.",
+      "Tag et billede af gruppens største feriesmil.",
+      "Spil opdagelsesrejsende, der finder hotellets morgenbuffet.",
+      "Poser med strandhåndklæder som superheltekapper.",
+      "Lav et hjerte med hænderne foran havet.",
+      "Tag et dramatisk solnedgangsbillede som et albumcover.",
+      "Frys midt i et fjollet dansetrin.",
+      "Genskab en berømt filmscene med strandting.",
+      "Tag et billede, hvor nogen ser lille ud i din hånd.",
+      "Poser som pirater, der leder efter begravet skat i sandet.",
+      "Få bedsteforældrene til at ligne rockstjerner.",
+      "Vis børnene, der fører de voksne ud på et stort eventyr.",
+      "Lav et billede, hvor alle peger på den samme mystiske ting.",
+      "Poser som professionelle atleter før en strandolympiade.",
+      "Tag et roligt altanbillede med din bedste feriepose.",
+      "Lad som om et pizzastykke er Spaniens mest værdifulde skat.",
+      "Lav en conga-række ved poolen uden at sprøjte på nogen.",
+      "Fang en skål med farverige drinks, uden pres for at drikke dem.",
+      "Poser med shoppingposer, som om I lige har vundet en modepris.",
+      "Tag et billede af sko, der peger mod havet.",
+      "Spil venlige zombier, der leder efter solcreme.",
+      "Lav jeres bedste fiskefjæs ved vandet.",
+      "Lav et helt seriøst billede med helt fjollede poser.",
+      "Lad som om hotelnøglekortet åbner en magisk portal.",
+      "Tag et parbillede spejlet i solbriller.",
+      "Stav CALLELLA med kroppe, håndklæder eller strandting.",
+      "Poser som om bølgerne klapper ad jeres optræden.",
+      "Lav en slowmotion-løbe-pose fanget som stillbillede.",
+      "Vis nogen, der modigt vogter den sidste kugle is.",
+      "Tag et gadebillede, hvor alle kigger i hver sin retning.",
+      "Lad som om I er statuer foran en turistattraktion.",
+      "Lav en sandtegning af jeres ferieholds logo.",
+      "Lav et billede af nogen, der surfer på tørt land.",
+      "Poser som kokke, der stolt præsenterer en restaurantmenu.",
+      "Tag et billede, hvor alle bruger solbriller på hver sin måde.",
+      "Spil et marchorkester med strandlegetøj som instrumenter.",
+      "Lav et billede, hvor den yngste ser ud til at bestemme.",
+      "Tag et poolbillede, hvor alle vinker kongeligt.",
+      "Poser som superhelte, der redder en smeltende is.",
+      "Lav en lille ferieparade på fortovet.",
+      "Lad som om en parasol er et rumskib, der lander i Calella.",
+      "Tag et billede af hænder, der laver bølger foran havet.",
+      "Spil en venlig piratkaptajn, der giver ferieanvisninger.",
+      "Få forældrene til at posere som teenagere på ferie.",
+      "Tag et restaurantbillede, hvor alle reagerer på fantastisk mad.",
+      "Poser med et lokalt skilt, som om det er en berømthed.",
+      "Lav et skyggebillede med sjove former ved solnedgang.",
+      "Lad som om I trækker horisonten tættere på med et usynligt reb.",
+      "Tag et billede, hvor alle kopierer det samme sjove ansigt.",
+      "Lav en rolig sejrsscene fra beachvolley.",
+      "Poser som detektiver, der undersøger mystiske fodspor i sandet.",
+      "Få en altanmorgenmad til at ligne en femstjernet begivenhed.",
+      "Tag en selfie med den højeste palme, du kan finde.",
+      "Lad som om et kort eller en telefon viser vej til en skat.",
+      "Lav et billede, hvor alle bliver overraskede over en lille musling.",
+      "Poser som et familieband, der skal til at give strandkoncert.",
+      "Tag et billede af alle, der danner en solcirkel.",
+      "Spil tjener, der præsenterer verdens fineste glas vand.",
+      "Lav et billede, hvor en hat ser større ud end en person.",
+      "Poser som svømmere før et imaginært mesterskabsløb.",
+      "Tag et fejringsbillede helt uden grund.",
+      "Lad som om I er turister, der ser havet for første gang.",
+      "Lav et billede, hvor alle balancerer en lille sikker genstand.",
+      "Poser som flamencodansere med strandhåndklæder.",
+      "Tag et sødt eventyrbillede med bedsteforældre og børnebørn.",
+      "Spil et superheltehold, der holder øje med Calella.",
+      "Lav et sjovt billede med en statue, plakat eller butiksvindue.",
+      "Poser som om en lille bølge lige har fortalt den bedste joke.",
+      "Tag et billede af farverige drinks på række som en regnbue.",
+      "Lav en strandyoga-pose, der både ser fredelig og fjollet ud.",
+      "Lad som om en poolmadras er en luksusyacht.",
+      "Tag et billede, hvor alle peger tæerne mod solnedgangen.",
+      "Poser som deltagere i en venlig sandskulpturkonkurrence.",
+      "Lav et gademodebillede med ferietøj.",
+      "Lad som om I lytter til en muslings hemmelige besked.",
+      "Tag et billede af alle, der kigger forelsket på desserten.",
+      "Lav en imaginær bådbesætning på en bænk eller mur.",
+      "Poser som et hold, der vinder Calellas mini-OL.",
+      "Lav et sjovt dyreimitationsbillede uden at forstyrre dyr.",
+      "Tag et gruppebillede, hvor alle gemmer sig bag ét håndklæde.",
+      "Lad som om havbrisen giver alle dramatisk hår.",
+      "Poser som museumsguider, der forklarer en kugle is.",
+      "Lav et billede af to personer, der genskaber et klassisk dansedyp.",
+      "Tag et billede i hotellets lobby, som om I ankommer til en prisfest.",
+      "Spil søde havmonstre, der stiger op fra strandhåndklæder.",
+      "Lav et billede, hvor nogen forsigtigt fanger månen eller solen.",
+      "Poser ved siden af en souvenir, som om den er uvurderlig kunst.",
+      "Tag et billede af alle, der laver hver sin sejrspose.",
+      "Lad som om I er værter for en lille strandnyhedsudsendelse.",
+      "Lav et billede, hvor hele gruppen bliver til én kæmpe krabbe.",
+      "Poser som et popband med skeer, kopper eller servietter som instrumenter.",
+      "Lav en solnedgangssilhuet, hvor alle laver hver sin form.",
+      "Tag det gladeste finaleudfordringsbillede, jeres feriehold kan lave."
+    ];
+
     const totalChallenges = challenges.length;
     const contentEl = document.getElementById("challengeContent");
     const englishEl = document.getElementById("challengeEn");
     const spanishEl = document.getElementById("challengeEs");
-    const progressEl = document.getElementById("progress");
+    const danishEl = document.getElementById("challengeDa");
     const completeEl = document.getElementById("completeMessage");
     const newButton = document.getElementById("newChallenge");
     const confettiCanvas = document.getElementById("confetti");
@@ -487,7 +581,7 @@
       const challenge = deck[currentIndex];
       englishEl.textContent = challenge.en;
       spanishEl.textContent = challenge.es;
-      progressEl.textContent = `Challenge ${currentIndex + 1} / ${totalChallenges}`;
+      danishEl.textContent = danishTranslations[challenge.originalIndex];
     }
 
     function showNextChallenge() {
