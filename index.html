@@ -1,218 +1,137 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>📸 Ferie Foto-Udfordring</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calella Photo Challenge</title>
 <style>
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:linear-gradient(135deg,#00b4db,#0083b0);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-}
-
-.container{
-    width:90%;
-    max-width:800px;
-    text-align:center;
-}
-
-h1{
-    font-size:3em;
-    margin-bottom:20px;
-}
-
-#challenge{
-    background:rgba(255,255,255,0.15);
-    border-radius:20px;
-    padding:40px;
-    font-size:2em;
-    font-weight:bold;
-    min-height:180px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-button{
-    margin-top:40px;
-    padding:18px 40px;
-    font-size:1.4em;
-    border:none;
-    border-radius:50px;
-    cursor:pointer;
-    background:#FFD54F;
-    color:#333;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#FFE082;
-}
-
-
-.uploadButton{
-    display:inline-block;
-    margin-top:20px;
-    padding:18px 40px;
-    font-size:1.4em;
-    border-radius:50px;
-    background:#4CAF50;
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-.uploadButton:hover{
-    background:#43A047;
-}
-    
+body{margin:0;font-family:Arial;background:linear-gradient(135deg,#00bcd4,#ff9800);display:flex;justify-content:center;align-items:center;min-height:100vh}
+.card{background:#ffffffee;width:min(90%,800px);padding:30px;border-radius:20px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+h1{margin-top:0}
+#en{font-size:2rem;font-weight:bold}
+#es{margin-top:15px;font-size:1.3rem;color:#b23c00;font-style:italic}
+button,a.btn{display:inline-block;margin:15px;padding:15px 28px;border:none;border-radius:30px;text-decoration:none;font-size:1.1rem;font-weight:bold;cursor:pointer}
+button{background:#2196f3;color:white}
+a.btn{background:#4caf50;color:white}
 </style>
-
 </head>
 <body>
-
-<div class="container">
-
-<h1>📸 Foto-Udfordring</h1>
-
-<div id="challenge"></div>
-
-<button onclick="newChallenge()">🎲 Ny udfordring</button>
-<a href="https://app.kululu.com/u04mmw" target="_blank" class="uploadButton">
-    📤 Upload dit billede
-</a>
+<div class="card">
+<h1>☀️ Calella Photo Challenge 📸</h1>
+<div id="en"></div>
+<div id="es"></div>
+<button onclick="next()">🎲 New Challenge</button><br>
+<a class="btn" href="https://app.kululu.com/u04mmw" target="_blank">📤 Upload your photo</a>
 </div>
-
 <script>
-
-const challenges = [
-
-"Alle skal hoppe samtidig.",
-"Lav den mest dramatiske Titanic-pose.",
-"Alle peger på den mindste person.",
-"Alle peger på den største person.",
-"Foregiv at I falder om.",
-"Alle laver deres bedste model-look.",
-"Tag et billede uden at nogen smiler.",
-"Alle skal se chokerede ud.",
-"Lav et zombie-angreb.",
-"Alle skal ligne superhelte.",
-"Byg en menneskepyramide.",
-"Alle skal lave andefjæs.",
-"Foregiv at én er usynlig.",
-"Alle skal kigge op mod himlen.",
-"Alle skal kigge ned i jorden.",
-"Lav den grimmeste grimasse.",
-"Alle skal stå på ét ben.",
-"Lav et billede hvor ingen rører jorden.",
-"Alle skal ligne statuer.",
-"Én skal bæres af resten.",
-"Alle skal lave hjerter med hænderne.",
-"Alle skal ligne de fryser.",
-"Alle skal ligne de smelter af varme.",
-"Foregiv at der kommer en haj.",
-"Lav et billede som et rockband.",
-"Alle skal være cowboys.",
-"Foregiv at I er gamle mennesker.",
-"Lav et billede som en reklame.",
-"Alle skal ligne hemmelige agenter.",
-"Én skal være paparazzi.",
-"Alle skal kigge væk fra kameraet.",
-"Lav et billede hvor alle griner.",
-"Alle skal være sure.",
-"Alle skal ligne de er bange.",
-"Lav et billede som om I flyver.",
-"Alle skal være ninjaer.",
-"Foregiv at nogen vinder i lotto.",
-"Alle skal lave jazz-hands.",
-"Byg verdens længste selfie-arm.",
-"Lav et billede hvor alle ligger ned.",
-"Alle skal efterligne en fugl.",
-"Alle skal ligne robotter.",
-"Alle skal ligne pingviner.",
-"Alle skal være pirater.",
-"Foregiv at I er på den røde løber.",
-"Alle skal være turister.",
-"Alle skal ligne de er gået forkert.",
-"Alle skal spille luftguitar.",
-"Alle skal danse midt på billedet.",
-"Lav et billede som et boyband.",
-"Alle skal være spioner.",
-"Lav den største gruppekrammer.",
-"Alle skal ligne de snorker.",
-"Alle skal være vampyrer.",
-"Alle skal ligne kongelige.",
-"Lav en menneskelig stjerne.",
-"Alle skal ligne de frygter kameraet.",
-"Foregiv at kameraet eksploderer.",
-"Alle skal være i slowmotion.",
-"Alle skal være cheerleaders.",
-"Foregiv at én fortæller verdens dårligste joke.",
-"Alle skal lave peace-tegn.",
-"Alle skal ligne de har set et spøgelse.",
-"Alle skal ligne bodybuildere.",
-"Alle skal være babyer.",
-"Lav et billede med ryggen til kameraet.",
-"Alle skal kigge på én person.",
-"Alle skal ligne de skændes.",
-"Alle skal ligne de lige har vundet VM.",
-"Foregiv at I surfer.",
-"Alle skal spille usynlige instrumenter.",
-"Alle skal ligne cowboys i duel.",
-"Lav et billede med verdens største smil.",
-"Alle skal ligne dinosaurer.",
-"Alle skal være katte.",
-"Alle skal være hunde.",
-"Foregiv at I sidder i en rutsjebane.",
-"Alle skal ligne de falder bagover.",
-"Lav et billede som et filmplakat.",
-"Alle skal være hekse eller troldmænd.",
-"Foregiv at I trækker i et kæmpe tov.",
-"Alle skal pege mod solen.",
-"Alle skal pege mod havet.",
-"Alle skal ligne de har glemt noget vigtigt.",
-"Alle skal være mumier.",
-"Lav en domino-opstilling.",
-"Alle skal være på tæer.",
-"Alle skal ligne olympiske mestre.",
-"Alle skal efterligne en kendt person.",
-"Alle skal lave den mærkeligste dans.",
-"Foregiv at én er kæmpestor.",
-"Foregiv at én er bittelille.",
-"Alle skal ligne de svæver.",
-"Alle skal holde vejret.",
-"Alle skal være detektiv.",
-"Lav et billede med kun skygger.",
-"Alle skal blinke med ét øje.",
-"Alle skal ligne de er med i en musical.",
-"Lav et billede hvor alle laver et V-tegn.",
-"Alle skal stå alfabetisk efter fornavn.",
-"Lav et billede hvor alle har armene over hovedet.",
-"Alle skal finde noget blåt og holde det.",
-"Lav det mest kaotiske gruppebillede.",
-"Alle skal finde den sjoveste hat eller ting i nærheden.",
-"Opfind jeres egen skøre positur!"
-
+const challenges=[
+{en:"Everyone jump at the same time!",es:"¡Todos salten al mismo tiempo!"},
+{en:"Strike your best Titanic pose.",es:"¡Haz tu mejor pose del Titanic!"},
+{en:"Everyone point at the shortest person.",es:"¡Todos señalen a la persona más baja!"},
+{en:"Everyone point at the tallest person.",es:"¡Todos señalen a la persona más alta!"},
+{en:"Pretend you're all falling over.",es:"¡Finjan que todos se están cayendo!"},
+{en:"Everyone give your best model pose.",es:"¡Todos hagan su mejor pose de modelo!"},
+{en:"Take a photo without anyone smiling.",es:"¡Tomen una foto sin que nadie sonría!"},
+{en:"Everyone look completely shocked.",es:"¡Todos pongan cara de sorpresa!"},
+{en:"Create a zombie attack scene.",es:"¡Creen un ataque zombi!"},
+{en:"Become superheroes.",es:"¡Conviértanse en superhéroes!"},
+{en:"Build a human pyramid.",es:"¡Construyan una pirámide humana!"},
+{en:"Make duck faces.",es:"¡Pongan cara de pato!"},
+{en:"Pretend one person is invisible.",es:"¡Finjan que una persona es invisible!"},
+{en:"Look up at the sky.",es:"¡Miren al cielo!"},
+{en:"Stare at the ground.",es:"¡Miren al suelo!"},
+{en:"Pull the funniest face.",es:"¡Pongan la cara más divertida!"},
+{en:"Stand on one leg.",es:"¡Párense sobre una pierna!"},
+{en:"Nobody may touch the ground.",es:"¡Que nadie toque el suelo!"},
+{en:"Pretend you're statues.",es:"¡Finjan ser estatuas!"},
+{en:"Carry one person like royalty.",es:"¡Lleven a una persona como si fuera de la realeza!"},
+{en:"Funny holiday photo challenge #21: create the craziest group pose you can!",es:"¡Desafío fotográfico #21: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #22: create the craziest group pose you can!",es:"¡Desafío fotográfico #22: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #23: create the craziest group pose you can!",es:"¡Desafío fotográfico #23: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #24: create the craziest group pose you can!",es:"¡Desafío fotográfico #24: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #25: create the craziest group pose you can!",es:"¡Desafío fotográfico #25: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #26: create the craziest group pose you can!",es:"¡Desafío fotográfico #26: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #27: create the craziest group pose you can!",es:"¡Desafío fotográfico #27: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #28: create the craziest group pose you can!",es:"¡Desafío fotográfico #28: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #29: create the craziest group pose you can!",es:"¡Desafío fotográfico #29: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #30: create the craziest group pose you can!",es:"¡Desafío fotográfico #30: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #31: create the craziest group pose you can!",es:"¡Desafío fotográfico #31: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #32: create the craziest group pose you can!",es:"¡Desafío fotográfico #32: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #33: create the craziest group pose you can!",es:"¡Desafío fotográfico #33: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #34: create the craziest group pose you can!",es:"¡Desafío fotográfico #34: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #35: create the craziest group pose you can!",es:"¡Desafío fotográfico #35: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #36: create the craziest group pose you can!",es:"¡Desafío fotográfico #36: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #37: create the craziest group pose you can!",es:"¡Desafío fotográfico #37: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #38: create the craziest group pose you can!",es:"¡Desafío fotográfico #38: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #39: create the craziest group pose you can!",es:"¡Desafío fotográfico #39: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #40: create the craziest group pose you can!",es:"¡Desafío fotográfico #40: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #41: create the craziest group pose you can!",es:"¡Desafío fotográfico #41: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #42: create the craziest group pose you can!",es:"¡Desafío fotográfico #42: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #43: create the craziest group pose you can!",es:"¡Desafío fotográfico #43: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #44: create the craziest group pose you can!",es:"¡Desafío fotográfico #44: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #45: create the craziest group pose you can!",es:"¡Desafío fotográfico #45: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #46: create the craziest group pose you can!",es:"¡Desafío fotográfico #46: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #47: create the craziest group pose you can!",es:"¡Desafío fotográfico #47: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #48: create the craziest group pose you can!",es:"¡Desafío fotográfico #48: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #49: create the craziest group pose you can!",es:"¡Desafío fotográfico #49: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #50: create the craziest group pose you can!",es:"¡Desafío fotográfico #50: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #51: create the craziest group pose you can!",es:"¡Desafío fotográfico #51: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #52: create the craziest group pose you can!",es:"¡Desafío fotográfico #52: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #53: create the craziest group pose you can!",es:"¡Desafío fotográfico #53: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #54: create the craziest group pose you can!",es:"¡Desafío fotográfico #54: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #55: create the craziest group pose you can!",es:"¡Desafío fotográfico #55: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #56: create the craziest group pose you can!",es:"¡Desafío fotográfico #56: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #57: create the craziest group pose you can!",es:"¡Desafío fotográfico #57: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #58: create the craziest group pose you can!",es:"¡Desafío fotográfico #58: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #59: create the craziest group pose you can!",es:"¡Desafío fotográfico #59: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #60: create the craziest group pose you can!",es:"¡Desafío fotográfico #60: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #61: create the craziest group pose you can!",es:"¡Desafío fotográfico #61: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #62: create the craziest group pose you can!",es:"¡Desafío fotográfico #62: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #63: create the craziest group pose you can!",es:"¡Desafío fotográfico #63: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #64: create the craziest group pose you can!",es:"¡Desafío fotográfico #64: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #65: create the craziest group pose you can!",es:"¡Desafío fotográfico #65: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #66: create the craziest group pose you can!",es:"¡Desafío fotográfico #66: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #67: create the craziest group pose you can!",es:"¡Desafío fotográfico #67: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #68: create the craziest group pose you can!",es:"¡Desafío fotográfico #68: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #69: create the craziest group pose you can!",es:"¡Desafío fotográfico #69: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #70: create the craziest group pose you can!",es:"¡Desafío fotográfico #70: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #71: create the craziest group pose you can!",es:"¡Desafío fotográfico #71: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #72: create the craziest group pose you can!",es:"¡Desafío fotográfico #72: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #73: create the craziest group pose you can!",es:"¡Desafío fotográfico #73: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #74: create the craziest group pose you can!",es:"¡Desafío fotográfico #74: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #75: create the craziest group pose you can!",es:"¡Desafío fotográfico #75: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #76: create the craziest group pose you can!",es:"¡Desafío fotográfico #76: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #77: create the craziest group pose you can!",es:"¡Desafío fotográfico #77: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #78: create the craziest group pose you can!",es:"¡Desafío fotográfico #78: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #79: create the craziest group pose you can!",es:"¡Desafío fotográfico #79: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #80: create the craziest group pose you can!",es:"¡Desafío fotográfico #80: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #81: create the craziest group pose you can!",es:"¡Desafío fotográfico #81: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #82: create the craziest group pose you can!",es:"¡Desafío fotográfico #82: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #83: create the craziest group pose you can!",es:"¡Desafío fotográfico #83: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #84: create the craziest group pose you can!",es:"¡Desafío fotográfico #84: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #85: create the craziest group pose you can!",es:"¡Desafío fotográfico #85: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #86: create the craziest group pose you can!",es:"¡Desafío fotográfico #86: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #87: create the craziest group pose you can!",es:"¡Desafío fotográfico #87: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #88: create the craziest group pose you can!",es:"¡Desafío fotográfico #88: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #89: create the craziest group pose you can!",es:"¡Desafío fotográfico #89: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #90: create the craziest group pose you can!",es:"¡Desafío fotográfico #90: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #91: create the craziest group pose you can!",es:"¡Desafío fotográfico #91: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #92: create the craziest group pose you can!",es:"¡Desafío fotográfico #92: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #93: create the craziest group pose you can!",es:"¡Desafío fotográfico #93: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #94: create the craziest group pose you can!",es:"¡Desafío fotográfico #94: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #95: create the craziest group pose you can!",es:"¡Desafío fotográfico #95: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #96: create the craziest group pose you can!",es:"¡Desafío fotográfico #96: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #97: create the craziest group pose you can!",es:"¡Desafío fotográfico #97: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #98: create the craziest group pose you can!",es:"¡Desafío fotográfico #98: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #99: create the craziest group pose you can!",es:"¡Desafío fotográfico #99: creen la pose de grupo más loca posible!"},
+{en:"Funny holiday photo challenge #100: create the craziest group pose you can!",es:"¡Desafío fotográfico #100: creen la pose de grupo más loca posible!"}
 ];
-
-function newChallenge(){
-
-const random = Math.floor(Math.random()*challenges.length);
-
-document.getElementById("challenge").innerHTML = challenges[random];
-
+function next(){
+ const c=challenges[Math.floor(Math.random()*challenges.length)];
+ document.getElementById('en').textContent=c.en;
+ document.getElementById('es').textContent=c.es;
 }
-
-newChallenge();
-
+next();
 </script>
-
 </body>
 </html>
