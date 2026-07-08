@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📸 Ferie Foto-Udfordring</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#00b4db,#0083b0);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    text-align:center;
+}
+
+h1{
+    font-size:3em;
+    margin-bottom:20px;
+}
+
+#challenge{
+    background:rgba(255,255,255,0.15);
+    border-radius:20px;
+    padding:40px;
+    font-size:2em;
+    font-weight:bold;
+    min-height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+button{
+    margin-top:40px;
+    padding:18px 40px;
+    font-size:1.4em;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    background:#FFD54F;
+    color:#333;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#FFE082;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>📸 Foto-Udfordring</h1>
+
+<div id="challenge"></div>
+
+<button onclick="newChallenge()">🎲 Ny udfordring</button>
+
+</div>
+
+<script>
+
+const challenges = [
+
+"Alle skal hoppe samtidig.",
+"Lav den mest dramatiske Titanic-pose.",
+"Alle peger på den mindste person.",
+"Alle peger på den største person.",
+"Foregiv at I falder om.",
+"Alle laver deres bedste model-look.",
+"Tag et billede uden at nogen smiler.",
+"Alle skal se chokerede ud.",
+"Lav et zombie-angreb.",
+"Alle skal ligne superhelte.",
+"Byg en menneskepyramide.",
+"Alle skal lave andefjæs.",
+"Foregiv at én er usynlig.",
+"Alle skal kigge op mod himlen.",
+"Alle skal kigge ned i jorden.",
+"Lav den grimmeste grimasse.",
+"Alle skal stå på ét ben.",
+"Lav et billede hvor ingen rører jorden.",
+"Alle skal ligne statuer.",
+"Én skal bæres af resten.",
+"Alle skal lave hjerter med hænderne.",
+"Alle skal ligne de fryser.",
+"Alle skal ligne de smelter af varme.",
+"Foregiv at der kommer en haj.",
+"Lav et billede som et rockband.",
+"Alle skal være cowboys.",
+"Foregiv at I er gamle mennesker.",
+"Lav et billede som en reklame.",
+"Alle skal ligne hemmelige agenter.",
+"Én skal være paparazzi.",
+"Alle skal kigge væk fra kameraet.",
+"Lav et billede hvor alle griner.",
+"Alle skal være sure.",
+"Alle skal ligne de er bange.",
+"Lav et billede som om I flyver.",
+"Alle skal være ninjaer.",
+"Foregiv at nogen vinder i lotto.",
+"Alle skal lave jazz-hands.",
+"Byg verdens længste selfie-arm.",
+"Lav et billede hvor alle ligger ned.",
+"Alle skal efterligne en fugl.",
+"Alle skal ligne robotter.",
+"Alle skal ligne pingviner.",
+"Alle skal være pirater.",
+"Foregiv at I er på den røde løber.",
+"Alle skal være turister.",
+"Alle skal ligne de er gået forkert.",
+"Alle skal spille luftguitar.",
+"Alle skal danse midt på billedet.",
+"Lav et billede som et boyband.",
+"Alle skal være spioner.",
+"Lav den største gruppekrammer.",
+"Alle skal ligne de snorker.",
+"Alle skal være vampyrer.",
+"Alle skal ligne kongelige.",
+"Lav en menneskelig stjerne.",
+"Alle skal ligne de frygter kameraet.",
+"Foregiv at kameraet eksploderer.",
+"Alle skal være i slowmotion.",
+"Alle skal være cheerleaders.",
+"Foregiv at én fortæller verdens dårligste joke.",
+"Alle skal lave peace-tegn.",
+"Alle skal ligne de har set et spøgelse.",
+"Alle skal ligne bodybuildere.",
+"Alle skal være babyer.",
+"Lav et billede med ryggen til kameraet.",
+"Alle skal kigge på én person.",
+"Alle skal ligne de skændes.",
+"Alle skal ligne de lige har vundet VM.",
+"Foregiv at I surfer.",
+"Alle skal spille usynlige instrumenter.",
+"Alle skal ligne cowboys i duel.",
+"Lav et billede med verdens største smil.",
+"Alle skal ligne dinosaurer.",
+"Alle skal være katte.",
+"Alle skal være hunde.",
+"Foregiv at I sidder i en rutsjebane.",
+"Alle skal ligne de falder bagover.",
+"Lav et billede som et filmplakat.",
+"Alle skal være hekse eller troldmænd.",
+"Foregiv at I trækker i et kæmpe tov.",
+"Alle skal pege mod solen.",
+"Alle skal pege mod havet.",
+"Alle skal ligne de har glemt noget vigtigt.",
+"Alle skal være mumier.",
+"Lav en domino-opstilling.",
+"Alle skal være på tæer.",
+"Alle skal ligne olympiske mestre.",
+"Alle skal efterligne en kendt person.",
+"Alle skal lave den mærkeligste dans.",
+"Foregiv at én er kæmpestor.",
+"Foregiv at én er bittelille.",
+"Alle skal ligne de svæver.",
+"Alle skal holde vejret.",
+"Alle skal være detektiv.",
+"Lav et billede med kun skygger.",
+"Alle skal blinke med ét øje.",
+"Alle skal ligne de er med i en musical.",
+"Lav et billede hvor alle laver et V-tegn.",
+"Alle skal stå alfabetisk efter fornavn.",
+"Lav et billede hvor alle har armene over hovedet.",
+"Alle skal finde noget blåt og holde det.",
+"Lav det mest kaotiske gruppebillede.",
+"Alle skal finde den sjoveste hat eller ting i nærheden.",
+"Opfind jeres egen skøre positur!"
+
+];
+
+function newChallenge(){
+
+const random = Math.floor(Math.random()*challenges.length);
+
+document.getElementById("challenge").innerHTML = challenges[random];
+
+}
+
+newChallenge();
+
+</script>
+
+</body>
+</html>
